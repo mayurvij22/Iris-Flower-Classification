@@ -1,95 +1,87 @@
-🌸 Iris Flower Classification
-📌 Project Overview
-This project builds a machine learning model to classify Iris flowers into three species:
+<div align="center">
 
-Setosa
-Versicolor
-Virginica
-It uses the Iris dataset, which contains 150 samples with four key features:
+# 🌸 Iris Flower Classification
 
-Sepal Length (cm)
-Sepal Width (cm)
-Petal Length (cm)
-Petal Width (cm)
-The goal is to develop a classifier that predicts the species of an Iris flower based on its physical characteristics.
+**Comparing 7 machine-learning models (each untuned and tuned) to classify Iris species. About 97.8% test accuracy.**
 
-📂 Dataset
-The dataset is publicly available and can be loaded using sklearn.datasets.
-It contains 150 samples (50 from each class) and four numerical features.
-📌 Source: Fisher’s Iris dataset (UCI Machine Learning Repository)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-189AB4)
+![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)
 
-🛠 Tech Stack
-Programming Language: Python 3.x
-Libraries Used:
-numpy – For numerical computations
-pandas – For data handling
-matplotlib & seaborn – For data visualization
-scikit-learn – For machine learning
-🚀 Installation & Setup
-🔹 Prerequisites
-Ensure you have Python installed (>= 3.7). Install dependencies using:
+</div>
 
-bash
-Copy
-Edit
-pip install numpy pandas matplotlib seaborn scikit-learn
-🔹 Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/your-username/Iris-Classification.git
-cd Iris-Classification
-🏗 Project Workflow
-1️⃣ Load Dataset
+---
 
-python
-Copy
-Edit
-from sklearn.datasets import load_iris
-import pandas as pd
+## 📌 Overview
 
-iris = load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-df['species'] = iris.target
-2️⃣ Data Exploration & Visualization
+The project predicts the species of an Iris flower (**Setosa**, **Versicolor** or **Virginica**) from four measurements:
 
-Pair plots to understand feature relationships
-Histograms & Box plots to analyze distributions
-3️⃣ Train-Test Split
+| Feature | Unit |
+|---|---|
+| Sepal length | cm |
+| Sepal width | cm |
+| Petal length | cm |
+| Petal width | cm |
 
-python
-Copy
-Edit
-from sklearn.model_selection import train_test_split
+The dataset (`Iris.csv`) has **150 samples**, 50 per species.
 
-X = df.iloc[:, :-1]
-y = df['species']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-4️⃣ Model Training
-Using Support Vector Machine (SVM) classifier:
+## 🔬 What the notebook does
 
-python
-Copy
-Edit
-from sklearn.svm import SVC
+1. **Exploratory data analysis**: distributions, pair plots and correlations with `seaborn` and `matplotlib`
+2. **Preprocessing**: label encoding and a train/test split
+3. **Model training**: each model is trained untuned, then tuned with hyperparameter search
+4. **Evaluation**: precision, recall, accuracy and macro-F1 on both train and test sets, collected into a comparison table
 
-model = SVC(kernel='linear')
-model.fit(X_train, y_train)
-5️⃣ Model Evaluation
+## 🤖 Models compared
 
-python
-Copy
-Edit
-from sklearn.metrics import accuracy_score
+| Model | Library |
+|---|---|
+| Logistic Regression | scikit-learn |
+| Decision Tree | scikit-learn |
+| Random Forest | scikit-learn |
+| Support Vector Machine | scikit-learn |
+| XGBoost | xgboost |
+| Gaussian Naive Bayes | scikit-learn |
+| Neural Network (MLP) | scikit-learn |
 
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-print(f'Accuracy: {accuracy * 100:.2f}%')
-📊 Results
-The model achieves an accuracy of 95-98% on the test dataset.
-Classification results are visualized using confusion matrices and classification reports.
-🎯 Future Improvements
-Implement hyperparameter tuning for better accuracy.
-Compare performance with other ML models (Decision Tree, Random Forest, KNN).
-Deploy the model using Flask, Streamlit, or FastAPI.
-Convert into a deep learning model with TensorFlow/Keras.
+## 📊 Results
+
+Most models reach **≈ 97.8% test accuracy** (macro-F1 ≈ 0.978). For example:
+
+| Model | Train accuracy | Test accuracy |
+|---|---|---|
+| Logistic Regression | 98.1% | 97.8% |
+| Logistic Regression (tuned) | 99.0% | 97.8% |
+| Decision Tree | 100% | 97.8% |
+
+Untuned trees and XGBoost score 100% on the training set, a sign of overfitting. The tuned variants close that gap
+while keeping the same test accuracy. The full comparison table is in the notebook.
+
+## 🚀 Run locally
+
+```bash
+git clone https://github.com/mayurvij22/Iris-Flower-Classification.git
+cd Iris-Flower-Classification
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost jupyter
+jupyter notebook "Iris Flower Classification.ipynb"
+```
+
+You can also open `Iris Flower Classification.html` to view the executed notebook without running anything.
+
+## 📁 Project structure
+
+```text
+├── Iris Flower Classification.ipynb   # Full analysis and modelling notebook
+├── Iris Flower Classification.html    # Executed notebook, viewable in a browser
+└── Iris.csv                           # Dataset (150 rows)
+```
+
+---
+
+<div align="center">
+
+Made by **[Mayur Patil](https://github.com/mayurvij22)**
+
+</div>
